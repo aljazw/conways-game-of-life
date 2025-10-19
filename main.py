@@ -4,14 +4,12 @@ pygame.init()
 
 # ----------------- SETTINGS -----------------
 
-
 WIDTH = 1920
 HEIGHT = 1080
 CELL_SIZE = 30
 
 cols = WIDTH // CELL_SIZE  
 rows = HEIGHT // CELL_SIZE
-
 
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Conway's Game of Life - Draw & Play")
@@ -22,14 +20,6 @@ grid = [[0 for _ in range(cols)] for _ in range(rows)]
 
 # Font for PAUSED text
 font = pygame.font.SysFont('Arial', 50)
-
-# Optional: load small pause icon (replace 'pause_icon.png' with your file)
-# Make sure the image exists in your working directory
-try:
-    pause_icon = pygame.image.load('pause_icon.png')
-    pause_icon = pygame.transform.scale(pause_icon, (50, 50))  # resize
-except:
-    pause_icon = None  # fallback if no image
 
 # ----------------- FUNCTIONS -----------------
 def count_neighbors(x, y):
@@ -97,12 +87,10 @@ while running:
             pygame.draw.rect(screen, color,
                              (y * CELL_SIZE, x * CELL_SIZE, CELL_SIZE - 1, CELL_SIZE - 1))
 
-    # Draw PAUSED text + icon if paused
+    # Draw PAUSED text
     if paused:
         text_surface = font.render('PAUSED', True, (255, 50, 50))
         screen.blit(text_surface, (10, 10))
-        if pause_icon:
-            screen.blit(pause_icon, (10, 70))  # below text
 
     pygame.display.flip()
     clock.tick(5)  # speed (frames per second)
